@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Radium , { StyleRoot } from 'radium';
 // import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person';
@@ -80,7 +81,11 @@ class App extends Component {
       font            : 'inherit',
       border          : '1px solid blue',
       padding         : '8px',
-      cursor          : 'pointer'
+      cursor          : 'pointer',
+      ':hover'        : {
+        backgroundColor:  'lightgreen',
+        color          :  'black'
+      }
     }
     let persons = null;
 
@@ -104,6 +109,10 @@ class App extends Component {
         </div>
       );
       style.backgroundColor = 'red';
+      style[':hover']        = {
+        backgroundColor:  'lightred',
+        color          :  'black'
+      }
 
     }
     const classes = [];// ['red', 'bold'].join(' ');
@@ -120,20 +129,23 @@ class App extends Component {
     // changed={this.nameChangedHandler}
     // console.log('state ---> ', this.state);
     return (
-      <div className="App">
-        <h1>React Basics</h1>
-        <p className={classes.join(' ')}> Test CSS styling </p>
-        {/* <button 
-          style={style}
-          onClick={this.switchNameHandler.bind(this,"Tim")}> Switch Name </button> */}
-        <button
-          style={style}
-          onClick={this.togglePersonsHandler}>Toggle Persons</button>
-          {persons}
+      <StyleRoot>
+        <div className="App">
+          <h1>React Basics</h1>
+          <p className={classes.join(' ')}> Test CSS styling </p>
+          {/* <button 
+            style={style}
+            onClick={this.switchNameHandler.bind(this,"Tim")}> Switch Name </button> */}
+          <button
+            style={style}
+            onClick={this.togglePersonsHandler}>Toggle Persons</button>
+            {persons}
 
-      </div>
+        </div>
+      </StyleRoot>
+
     );
   }
 }
 
-export default App;
+export default Radium(App);
