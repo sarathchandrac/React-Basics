@@ -1,4 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React-Basics
+React Basic Features
 
 ## Available Scripts
 
@@ -66,3 +68,13 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+# Create new Project
+
+> git remote add origin remote repository URL
+# Sets the new remote
+$ git remote -v
+# Verifies the new remote URL
+
+git push origin master --allow-unrelated-histories
+# Pushes the changes in your local repository up to the remote repository you specified as the origin
