@@ -75,7 +75,8 @@ class App extends Component {
 
   render() {
     const style = {
-      backgroundColor : 'white',
+      backgroundColor : 'green',
+      color           : 'white',
       font            : 'inherit',
       border          : '1px solid blue',
       padding         : '8px',
@@ -102,15 +103,29 @@ class App extends Component {
            
         </div>
       );
+      style.backgroundColor = 'red';
+
     }
+    const classes = [];// ['red', 'bold'].join(' ');
+    if (this.state.persons.length <= 2) {
+      classes.push('red');
+
+    }
+    if (this.state.persons.length <= 1) {
+      classes.push('bold');
+
+    }
+
+
     // changed={this.nameChangedHandler}
     // console.log('state ---> ', this.state);
     return (
       <div className="App">
         <h1>React Basics</h1>
-        <button 
+        <p className={classes.join(' ')}> Test CSS styling </p>
+        {/* <button 
           style={style}
-          onClick={this.switchNameHandler.bind(this,"Tim")}> Switch Name </button>
+          onClick={this.switchNameHandler.bind(this,"Tim")}> Switch Name </button> */}
         <button
           style={style}
           onClick={this.togglePersonsHandler}>Toggle Persons</button>
