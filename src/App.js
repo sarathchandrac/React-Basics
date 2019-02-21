@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Radium , { StyleRoot } from 'radium';
 // import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person';
@@ -129,7 +128,6 @@ class App extends Component {
     // changed={this.nameChangedHandler}
     // console.log('state ---> ', this.state);
     return (
-      <StyleRoot>
         <div className="App">
           <h1>React Basics</h1>
           <p className={classes.join(' ')}> Test CSS styling </p>
@@ -142,10 +140,9 @@ class App extends Component {
             {persons}
 
         </div>
-      </StyleRoot>
 
     );
   }
 }
 
-export default Radium(App);
+export default App;
