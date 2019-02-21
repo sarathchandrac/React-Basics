@@ -2,8 +2,8 @@ import React from 'react';
 import './Person.css';
 
 const Person = (props) => {
-    console.log('props ---> ', props);
-    console.log('allow us to access to all properites passed in components ---> ');
+    // console.log('props ---> ', props);
+    // console.log('allow us to access to all properites passed in components ---> ');
     return (
         <div className="Person">
             <p onClick={props.click}> I'm {props.name} </p>
