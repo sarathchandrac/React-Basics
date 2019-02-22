@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -74,19 +74,9 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor : 'green',
-      color           : 'white',
-      font            : 'inherit',
-      border          : '1px solid blue',
-      padding         : '8px',
-      cursor          : 'pointer',
-      ':hover'        : {
-        backgroundColor:  'lightgreen',
-        color          :  'black'
-      }
-    }
+
     let persons = null;
+    let btnClass = '';
 
     if ( this.state.showPersons ) {
       persons = (
@@ -107,35 +97,30 @@ class App extends Component {
            
         </div>
       );
-      style.backgroundColor = 'red';
-      style[':hover']        = {
-        backgroundColor:  'lightred',
-        color          :  'black'
-      }
+      btnClass = classes.Red;
 
     }
-    const classes = [];// ['red', 'bold'].join(' ');
+    const assignedClasses = [];// ['red', 'bold'].join(' ');
     if (this.state.persons.length <= 2) {
-      classes.push('red');
+      assignedClasses.push( classes.red);
 
     }
     if (this.state.persons.length <= 1) {
-      classes.push('bold');
-
+      assignedClasses.push( classes.bold);
     }
 
 
     // changed={this.nameChangedHandler}
     // console.log('state ---> ', this.state);
     return (
-        <div className="App">
+        <div className={classes.App}>
           <h1>React Basics</h1>
-          <p className={classes.join(' ')}> Test CSS styling </p>
+          <p className={assignedClasses.join(' ')}> Test CSS styling </p>
           {/* <button 
             style={style}
             onClick={this.switchNameHandler.bind(this,"Tim")}> Switch Name </button> */}
           <button
-            style={style}
+            className={btnClass}
             onClick={this.togglePersonsHandler}>Toggle Persons</button>
             {persons}
 
