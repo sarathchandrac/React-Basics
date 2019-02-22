@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import classes from './App.css';
 import Person from './Person/Person';
+import ErrorBoundary from './ErrorHandlers/ErrorBoundary';
 
 class App extends Component {
   // state is managed inside a compoenent
@@ -83,13 +84,18 @@ class App extends Component {
         <div >
           {this.state.persons.map((person, index)=>{
             return (
-              <Person 
-                name={person.name}
-                click={() => this.deletePersonHandler(index)}
-                changed={(event) =>{
-                  console.log("person ---> ", person);
-                   this.nameChangedHandler(event, person.id)}}
-                key={person.id} >I Like {person.hobby}</Person>
+              <ErrorBoundary
+                key={person.id}>
+
+                <Person 
+                  name={person.name}
+                  click={() => this.deletePersonHandler(index)}
+                  changed={(event) =>{
+                    console.log("person ---> ", person);
+                    this.nameChangedHandler(event, person.id)}}
+                  >I Like {person.hobby}
+                </Person>
+              </ErrorBoundary>
 
             );
 
