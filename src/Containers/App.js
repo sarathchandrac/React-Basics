@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import classes from './App.css';
-import Person from './Person/Person';
-import ErrorBoundary from './ErrorHandlers/ErrorBoundary';
+import ErrorBoundary from './../ErrorHandlers/ErrorBoundary';
+import Person from './../Components/Persons/Person/Person';
+import Cockpit from '../Components/Cockpit/Cockpit';
+import Persons from './../Components/Persons/Persons';
 
 class App extends Component {
   // state is managed inside a compoenent
@@ -48,6 +50,7 @@ class App extends Component {
   //   })
   // }
   togglePersonsHandler = () => {
+    console.log('clicked...')
     const showPersons = this.state.showPersons;
     this.setState({
       showPersons: !showPersons
@@ -73,7 +76,6 @@ class App extends Component {
 
     });
   }
-
   render() {
 
     let persons = null;
@@ -82,37 +84,17 @@ class App extends Component {
     if ( this.state.showPersons ) {
       persons = (
         <div >
-          {this.state.persons.map((person, index)=>{
-            return (
-              <ErrorBoundary
-                key={person.id}>
+          <Persons
+            persons = {this.state.persons}
+            clicked = {this.deletePersonHandler}
+            changed = {this.nameChangedHandler}
+          ></Persons>
+          
 
-                <Person 
-                  name={person.name}
-                  click={() => this.deletePersonHandler(index)}
-                  changed={(event) =>{
-                    console.log("person ---> ", person);
-                    this.nameChangedHandler(event, person.id)}}
-                  >I Like {person.hobby}
-                </Person>
-              </ErrorBoundary>
-
-            );
-
-          })}
            
         </div>
       );
-      btnClass = classes.Red;
 
-    }
-    const assignedClasses = [];// ['red', 'bold'].join(' ');
-    if (this.state.persons.length <= 2) {
-      assignedClasses.push( classes.red);
-
-    }
-    if (this.state.persons.length <= 1) {
-      assignedClasses.push( classes.bold);
     }
 
 
@@ -120,14 +102,10 @@ class App extends Component {
     // console.log('state ---> ', this.state);
     return (
         <div className={classes.App}>
-          <h1>React Basics</h1>
-          <p className={assignedClasses.join(' ')}> Test CSS styling </p>
-          {/* <button 
-            style={style}
-            onClick={this.switchNameHandler.bind(this,"Tim")}> Switch Name </button> */}
-          <button
-            className={btnClass}
-            onClick={this.togglePersonsHandler}>Toggle Persons</button>
+            <Cockpit 
+              showPersons = {this.state.showPersons}
+              noPersons = {this.state.persons.length}
+              toggle = {this.togglePersonsHandler} />
             {persons}
 
         </div>
