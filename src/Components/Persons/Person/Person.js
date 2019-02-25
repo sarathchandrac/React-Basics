@@ -1,19 +1,28 @@
-import React from 'react';
+import React, {Component} from 'react';
 import classes from './Person.css';
 
-const Person = (props) => {
-    // console.log('props ---> ', props);
-    // console.log('allow us to access to all properites passed in components ---> ');
+class Person extends Component {
+    // componentWillReceiveProps(props) {
+
+    // }
+    shouldComponentUpdate(nextPropss, nextState){
+    console.log('[Person.js] shouldComponentUpdate');
+    return true;
+    }
+    render() {
+    console.log('[person.js] render ---> ');
     return (
-        <div className={classes.Person} >
-            <p onClick={props.click}> I'm {props.name} </p>
-            <p>{props.children}</p>
-            <input
-                defaultValue={props.name} 
-                type="text" 
-                onChange={props.changed}></input>
-        </div>
-    )
-};
+            <div className={classes.Person} >
+                <p onClick={this.props.click}> I'm {this.props.name} </p>
+                <p>{this.props.children}</p>
+                <input
+                    defaultValue={this.props.name} 
+                    type="text" 
+                    onChange={this.props.changed}></input>
+            </div>
+        )
+    }
+}
+
 
 export default Person;

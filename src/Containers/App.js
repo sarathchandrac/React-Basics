@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import classes from './App.css';
-import ErrorBoundary from './../ErrorHandlers/ErrorBoundary';
-import Person from './../Components/Persons/Person/Person';
 import Cockpit from '../Components/Cockpit/Cockpit';
 import Persons from './../Components/Persons/Persons';
 
@@ -10,13 +8,48 @@ class App extends Component {
   // state is managed inside a compoenent
   // state should be used with care
   // Change in state will re render the dom
+  constructor(props) {
+    super(props);
+    console.log('[App.js]: 1 constructor');
+  }
   state = {
     persons: [
       { id: "1", name: "Sarath", hobby: "Badminton"},
       { id: "2", name: "Chandra", hobby: "Tennis"},
       { id: "3", name: "James", hobby: "Chess"}
-    ]
+    ],
+    otherState: 'Some other value',
+    showCockpit: true,
+    showPersons: false
   }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log("[App.js]: 2 get derived state from props", nextProps);
+    return prevState;
+  }
+ 
+  
+  //obsolate hook for component
+  // componentWillMount() {
+  //   console.log("[App.js]: 4 Component will mount before component did mount -------> ");
+
+  // }
+
+  componentDidMount() {
+    console.log("[App.js]: 5 Component Did mount -------> ");
+
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("[App.js]: 5 shouldComponentUpdate -------> ");
+    return true;
+  }
+
+  componentDidUpdate() {
+    console.log("[App.js]: 6 componentDidUpdate -------> ");
+
+  }
+  
   switchNameHandler = (newName) => {
     console.log("was clicked");
     this.setState({
@@ -79,7 +112,7 @@ class App extends Component {
   render() {
 
     let persons = null;
-    let btnClass = '';
+    console.log("[App.js]: 3 render method ----> ");
 
     if ( this.state.showPersons ) {
       persons = (
@@ -102,10 +135,17 @@ class App extends Component {
     // console.log('state ---> ', this.state);
     return (
         <div className={classes.App}>
-            <Cockpit 
+          <button
+            onClick={() => {
+              this.setState( { showCockpit: !this.state.showCockpit })
+            }}
+          >Remove Cockpit</button>
+          {this.state.showCockpit ?  <Cockpit 
               showPersons = {this.state.showPersons}
               noPersons = {this.state.persons.length}
               toggle = {this.togglePersonsHandler} />
+               : null }
+
             {persons}
 
         </div>
